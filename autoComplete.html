@@ -1,0 +1,16 @@
+<template>
+    <require from="./autoComplete.css"></require>
+    <div id="search-wrapper-${idClass}" class="search-wrapper ${idClass}" focusout.trigger="close()" keydown.delegate="handleKeypressInput($event)">
+        <i class="fa fa-times search-clear" aria-hidden="true" click.delegate="clearSearchTerm()"> </i>
+        <input id="search-input-${idClass}" class="form-control ${idClass}" type="text" autocomplete="off" value.bind="searchTerm"
+            input.trigger="filterItems($event)" placeholder="Search.." focusin.trigger="ifShowAllOpen()" />
+        <input type="hidden" model.bind="selectedItemId" />
+
+        <ul id="search-results-${idClass}" class="search-result ${idClass}" if.bind="open">
+            <li repeat.for="item of searchResult" click.trigger="selectSearchItem(item)" mousedown.trigger="" class="${idClass} search-item"
+                id="${idClass}-${item.id}">
+                ${item.description}
+            </li>
+        </ul>
+    </div>
+</template>
